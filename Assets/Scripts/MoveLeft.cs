@@ -3,11 +3,13 @@ using UnityEngine;
 public class MoveLeft : MonoBehaviour
 {
     public float speed = 10f;
+    public int obstacleType;
+    private ObstacleObjectPool _objectPool;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        _objectPool = FindObjectOfType<ObstacleObjectPool>();
     }
 
     // Update is called once per frame
@@ -25,7 +27,7 @@ public class MoveLeft : MonoBehaviour
 
         if (transform.position.x < -15 && gameObject.CompareTag("Obstacle"))
         {
-            Destroy(gameObject);
+            _objectPool.Release(gameObject, obstacleType);
         }
     }
 }
